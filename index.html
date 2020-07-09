@@ -57,7 +57,7 @@
                 <br>
 
                 <div class="calculadora">
-                    <input type="text" class="form-control resultado" placeholder="0" disabled="disabled">
+                    <input id="resultado" type="text" class="form-control resultado" placeholder="0" disabled="disabled">
 
                     <div class="row">
                         <button onclick="calcular('acao', 'c')" type="button" class="btn btn-secondary btn-lg clear font-weight-light"><strong>C</strong></button>
@@ -76,7 +76,7 @@
                         <button onclick="calcular('valor', 4 )" type="button" class="btn btn-dark btn-lg font-weight-light">4</button>
                         <button onclick="calcular('valor', 5 )" type="button" class="btn btn-dark btn-lg font-weight-light">5</button>
                         <button onclick="calcular('valor', 6 )" type="button" class="btn btn-dark btn-lg font-weight-light">6</button>
-                        <button onclick="calcular('scso', '+')" type="button" class="btn btn-warning btn-lg font-weight-light"><strong>+</strong></button>
+                        <button onclick="calcular('acao', '+')" type="button" class="btn btn-warning btn-lg font-weight-light"><strong>+</strong></button>
                     </div>
 
                     <div class="row">
@@ -99,7 +99,28 @@
     <script>
         
         function calcular(tipo, valor){
-            console.log(tipo, valor)
+            
+            if(tipo == 'acao') {
+
+            if(valor === 'c'){
+             //limpar o valor (id resultado)
+             document.getElementById('resultado').value = ''
+            }
+
+            if(valor === '/' || valor === '*' || valor === '-' || valor === '+' || valor === '.'){
+               document.getElementById('resultado').value += valor 
+            }
+
+            if(valor === '='){
+               var valor_campo = eval(document.getElementById('resultado').value)
+                
+                document.getElementById('resultado').value = valor_campo
+            }
+
+            }else if(tipo == 'valor'){
+
+                document.getElementById('resultado').value += valor
+            }
         }
 
     </script>
